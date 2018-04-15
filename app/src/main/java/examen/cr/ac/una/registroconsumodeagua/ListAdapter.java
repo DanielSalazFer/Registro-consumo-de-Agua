@@ -1,5 +1,6 @@
 package examen.cr.ac.una.registroconsumodeagua;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ public class ListAdapter extends ArrayAdapter<RegistroAgua> implements View.OnCl
     private ArrayList<RegistroAgua> dataSet;
     Context mContext;
 
+
     public ListAdapter(ArrayList<RegistroAgua> data, Context context) {
         super(context, R.layout.list_item, data);
         this.dataSet = data;
@@ -29,12 +31,15 @@ public class ListAdapter extends ArrayAdapter<RegistroAgua> implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        System.out.println("onClick");
+
     }
 
+
+    @SuppressLint("ResourceAsColor")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        Logica logica = new Logica();
 
         if (convertView == null) {
             LayoutInflater vi;
@@ -44,23 +49,38 @@ public class ListAdapter extends ArrayAdapter<RegistroAgua> implements View.OnCl
 
 
 
-        System.out.println("Position = "+position);
-
         RegistroAgua registro = getItem(position);
 
-        System.out.println("getItem = "+position);
-        System.out.println("ConvertView = "+convertView);
+
+
+
 
         TextView fecha = (TextView) convertView.findViewById(R.id.listFecha);
         TextView mililitros = (TextView) convertView.findViewById(R.id.listMililitros);
         TextView peso = (TextView) convertView.findViewById(R.id.listPeso);
 
         fecha.setText(registro.getFecha().toString());
-        mililitros.setText(String.valueOf(registro.getMililitros()));
-        peso.setText(String.valueOf(registro.getPeso()));
 
 
-        System.out.println("Dataset Size: " + dataSet.size());
+        mililitros.setText(String.valueOf(registro.getMililitros()) + getContext().getString(R.string.mililitros));
+
+        peso.setText(String.valueOf(registro.getPeso()) + getContext().getString(R.string.kilogramos));
+
+
+
+        if(!logica.aguaRecomendada(registro)){
+            fecha.setBackgroundColor(convertView.getResources().getColor(R.color.rojo));
+            mililitros.setBackgroundColor(convertView.getResources().getColor(R.color.rojo));
+            peso.setBackgroundColor(convertView.getResources().getColor(R.color.rojo));
+        }
+        else{
+            fecha.setBackgroundColor(convertView.getResources().getColor(R.color.verde));
+            mililitros.setBackgroundColor(convertView.getResources().getColor(R.color.verde));
+            peso.setBackgroundColor(convertView.getResources().getColor(R.color.verde));
+        }
+
+
+
 
 
         return convertView;

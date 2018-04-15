@@ -1,10 +1,9 @@
 package examen.cr.ac.una.registroconsumodeagua;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,15 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.DatePicker;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import examen.cr.ac.una.registroconsumodeagua.model.RegistroAgua;
+
+import static examen.cr.ac.una.registroconsumodeagua.R.color.rojo;
+import static examen.cr.ac.una.registroconsumodeagua.R.color.verde;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,25 +32,26 @@ public class MainActivity extends AppCompatActivity
     RegistroAgua nuevo;
 
     ArrayList registros= new ArrayList<RegistroAgua>();
+    
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
 
 
+
         ListAdapter adapter= new ListAdapter(registros,getApplicationContext());
 
-        if(getIntent().getSerializableExtra("nuevoRegistro")!=null){
+        if(getIntent().getSerializableExtra(getResources().getString(R.string.keyAgregar))!=null){
 
 
-            registros= (ArrayList) getIntent().getSerializableExtra("nuevoRegistro");
-            //registros.add(nuevo);
-            //adapter.add(nuevo);
+            registros= (ArrayList) getIntent().getSerializableExtra(getResources().getString(R.string.keyAgregar));
+
             adapter.addAll(registros);
 
-            System.out.println("registros Size: " + registros.size());
 
         }
 
@@ -79,20 +80,36 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
 
                 Intent i = new Intent(MainActivity.this, Agregar.class);
-                i.putExtra("registrosActuales",registros);
+                i.putExtra(getResources().getString(R.string.keyMainActivity),registros);
                 startActivity(i);
             }
         });
 
 
 
-        ListView lista = findViewById(R.id.lista);
+
+        ListView lista = (ListView) findViewById(R.id.lista);
         lista.setAdapter(adapter);
 
+/*
+
+        if(getIntent().getSerializableExtra(getResources().getString(R.string.keyAgregar))!=null){
+
+
+            if(getIntent().getSerializableExtra(getResources().getString(R.string.keyAguaRecomendada))!=null){
+
+
+                boolean resultadoFormula = (boolean)getIntent().getSerializableExtra(getResources().getString(R.string.keyAguaRecomendada));
+                if(resultadoFormula)
+                    formulaBien = true;
+                else
+                    formulaBien = false;
+            }
+
+
+        }*/
 
 
     }

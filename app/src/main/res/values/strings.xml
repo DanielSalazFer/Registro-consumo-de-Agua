@@ -7,4 +7,14 @@
     <string name="action_settings">Settings</string>
 
     <string name="intentName">nuevoRegistro</string>
+    <string name="advertenciaDia">¡Ya existe un registro para esa fecha, intente de nuevo!</string>
+
+    <string name="keyAgregar">nuevoRegistro</string>
+    <string name="keyMainActivity">registrosActuales</string>
+    <string name="keyAguaRecomendada">AguaRecomendada</string>
+
+
+    <string name="mililitros"> ml</string>
+    <string name="kilogramos"> kg</string>
+
 </resources>

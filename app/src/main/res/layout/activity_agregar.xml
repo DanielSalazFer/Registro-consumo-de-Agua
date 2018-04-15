@@ -56,34 +56,37 @@
     <DatePicker
         android:id="@+id/date"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:dayOfWeekBackground="@color/app"
-        android:dayOfWeekTextAppearance="@color/app"
-        android:headerBackground="@color/app"
-        android:yearListItemTextAppearance="@color/app"
-        android:yearListSelectorColor="@color/app"
-        android:onClick="click"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/fecha"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
+        android:layout_height="336dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="FECHA"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/date"
+        android:dayOfWeekBackground="@color/app"
+        android:dayOfWeekTextAppearance="@color/app"
+        android:headerBackground="@color/app"
+        android:scrollbarThumbHorizontal="@color/app"
+        android:scrollbarThumbVertical="@color/app"
+        android:scrollbarTrackHorizontal="@color/app"
+        android:scrollbarTrackVertical="@color/app"
+        android:yearListItemTextAppearance="@color/app"
+        android:yearListSelectorColor="@color/app"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <ImageButton
+        android:id="@+id/guardarBoton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
 </android.support.constraint.ConstraintLayout>

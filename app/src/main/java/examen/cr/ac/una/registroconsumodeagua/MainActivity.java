@@ -29,8 +29,31 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    RegistroAgua nuevo;
+
+    ArrayList registros= new ArrayList<RegistroAgua>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+        ListAdapter adapter= new ListAdapter(registros,getApplicationContext());
+
+        if(getIntent().getSerializableExtra("nuevoRegistro")!=null){
+
+
+            registros= (ArrayList) getIntent().getSerializableExtra("nuevoRegistro");
+            //registros.add(nuevo);
+            //adapter.add(nuevo);
+            adapter.addAll(registros);
+
+            System.out.println("registros Size: " + registros.size());
+
+        }
+
 
 
 
@@ -38,22 +61,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-
-                Intent i = new Intent(MainActivity.this, Agregar.class);
-                startActivity(i);
-            }
-        });
-
-
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -66,23 +73,27 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        ListView lista = findViewById(R.id.lista);
 
-        ArrayList<RegistroAgua> registros = new ArrayList<RegistroAgua>();
-        registros.add(new RegistroAgua(new Date(2018,12,23), 100, 70));
-        System.out.println("SIII");
-        ListAdapter adapter= new ListAdapter(registros,getApplicationContext());
-        System.out.println("DODDO");
-        lista.setAdapter(adapter);
-        System.out.println("JGNBNV");
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View view) {
+               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
 
-                //Movimiento dataModel= (Movimiento)dataModels.get(position);
-
+                Intent i = new Intent(MainActivity.this, Agregar.class);
+                i.putExtra("registrosActuales",registros);
+                startActivity(i);
             }
         });
+
+
+
+        ListView lista = findViewById(R.id.lista);
+        lista.setAdapter(adapter);
+
+
 
     }
 

@@ -43,6 +43,7 @@ public class ListAdapter extends ArrayAdapter<RegistroAgua> implements View.OnCl
         }
 
 
+
         System.out.println("Position = "+position);
 
         RegistroAgua registro = getItem(position);
@@ -57,6 +58,9 @@ public class ListAdapter extends ArrayAdapter<RegistroAgua> implements View.OnCl
         fecha.setText(registro.getFecha().toString());
         mililitros.setText(String.valueOf(registro.getMililitros()));
         peso.setText(String.valueOf(registro.getPeso()));
+
+
+        System.out.println("Dataset Size: " + dataSet.size());
 
 
         return convertView;

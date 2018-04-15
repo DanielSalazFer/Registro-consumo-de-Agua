@@ -13,14 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import examen.cr.ac.una.registroconsumodeagua.model.RegistroAgua;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -51,6 +64,26 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        ListView lista = findViewById(R.id.lista);
+
+        ArrayList<RegistroAgua> registros = new ArrayList<RegistroAgua>();
+        registros.add(new RegistroAgua(new Date(2018,12,23), 100, 70));
+        System.out.println("SIII");
+        ListAdapter adapter= new ListAdapter(registros,getApplicationContext());
+        System.out.println("DODDO");
+        lista.setAdapter(adapter);
+        System.out.println("JGNBNV");
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //Movimiento dataModel= (Movimiento)dataModels.get(position);
+
+            }
+        });
+
     }
 
     @Override

@@ -48,6 +48,6 @@ public class RegistroAgua implements Serializable{
 
     @Override
     public String toString() {
-        return "Fecha: " + this.fecha + " Mililitros: " + this.mililitros + " Peso: " + this.peso;
+        return this.fecha + "" + this.mililitros + "" + this.peso;
     }
 }

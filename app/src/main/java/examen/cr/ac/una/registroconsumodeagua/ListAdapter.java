@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import examen.cr.ac.una.registroconsumodeagua.model.RegistroAgua;
 
+import static examen.cr.ac.una.registroconsumodeagua.R.string.hora;
+
 /**
  * Created by Daniel on 15/04/2018.
  */
@@ -59,7 +61,9 @@ public class ListAdapter extends ArrayAdapter<RegistroAgua> implements View.OnCl
         TextView mililitros = (TextView) convertView.findViewById(R.id.listPromMl);
         TextView peso = (TextView) convertView.findViewById(R.id.listPromKg);
 
-        fecha.setText(registro.getFecha().toString());
+        String fechaFinal = registro.getFecha().toString().replace(getContext().getString(R.string.hora),"");
+
+        fecha.setText(fechaFinal.toString().replace(getContext().getString(R.string.time),""));
 
 
         mililitros.setText(String.valueOf(registro.getMililitros()) + getContext().getString(R.string.mililitros));

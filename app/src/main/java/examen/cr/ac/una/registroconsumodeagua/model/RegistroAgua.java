@@ -21,6 +21,7 @@ public class RegistroAgua implements Serializable{
         this.mililitros = mililitros;
         this.peso = peso;
     }
+    
 
     public Date getFecha() {
         return fecha;

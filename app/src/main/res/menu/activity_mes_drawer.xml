@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item android:title="Registro por dias">
+        <menu>
+            <item
+                android:id="@+id/nav_dias"
+                android:icon="@android:drawable/ic_menu_day"
+                android:title="@string/Diario" />
+
+        </menu>
+
+    </item>
+
+    <item android:title="Promedio mensual">
+        <menu>
+            <item
+                android:id="@+id/nav_mes"
+                android:icon="@android:drawable/ic_menu_today"
+                android:title="@string/Mensual" />
+
+        </menu>
+    </item>
+
+</menu>

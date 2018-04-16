@@ -1,9 +1,10 @@
 package examen.cr.ac.una.registroconsumodeagua;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,50 +13,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import examen.cr.ac.una.registroconsumodeagua.model.RegistroAgua;
 
-public class MainActivity extends AppCompatActivity
+public class MesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
-
-
-    RegistroAgua nuevo;
-
-    ArrayList registros= new ArrayList<RegistroAgua>();
-
-
-
-    @SuppressLint("ResourceAsColor")
+    ArrayList<RegistroAgua> registros;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        registros = (ArrayList<RegistroAgua>) getIntent().getSerializableExtra(getResources().getString(R.string.keyMainActivity));
+        ArrayList<Integer> meses = new ArrayList<Integer>();
 
 
+        for(RegistroAgua reg : registros){
 
-
-        ListAdapter adapter= new ListAdapter(registros,getApplicationContext());
-
-        if(getIntent().getSerializableExtra(getResources().getString(R.string.keyAgregar))!=null){
-
-
-            registros= (ArrayList) getIntent().getSerializableExtra(getResources().getString(R.string.keyAgregar));
-
-            adapter.addAll(registros);
-
-
+            meses.add(reg.getFecha().getMonth()+1);
         }
+
+        // esto me elimina los mese repetidos de la lista
+        HashSet<Integer> hashSet = new HashSet<Integer>(meses);
+        meses.clear();
+        meses.addAll(hashSet);
+
+        ListAdapterMes adapter= new ListAdapterMes(registros,getApplicationContext(),meses);
+
+
 
 
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -70,27 +64,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(MainActivity.this, Agregar.class);
-                i.putExtra(getResources().getString(R.string.keyMainActivity),registros);
-                startActivity(i);
-            }
-        });
-
-
-
-
-        ListView lista = (ListView) findViewById(R.id.lista);
+        ListView lista = (ListView) findViewById(R.id.listaMes);
         lista.setAdapter(adapter);
-
-
-
     }
 
     @Override
@@ -106,7 +81,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.mes, menu);
         return true;
     }
 
@@ -119,7 +94,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent salida=new Intent( Intent.ACTION_MAIN);
+            Intent salida=new Intent( Intent.ACTION_MAIN); //Llamando a la activity principal
             finish();
             System.exit(0);
             return true;
@@ -131,7 +106,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_dias) {

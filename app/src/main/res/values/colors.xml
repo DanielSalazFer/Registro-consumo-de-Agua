@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="app">#ea7777</color>
-    <color name="rojo">#ff0000</color>
-    <color name="verde">#00ff48</color>
+    <color name="colorAccent">#ea7777</color>
+    <color name="app">#ff0000</color>
+    <color name="rojo">#ea7777</color>
+    <color name="verde">#3ff472</color>
 </resources>
